@@ -28,6 +28,7 @@ function show(w,trigger){activeTrigger=trigger;detail.replaceChildren();const he
  const links=el('div','archive-detail-links');[aLink('شاهد رابط العمل الأصلي',w.url),aLink('رابط المنتج إن وُجد',w.other),aLink('مصدره في الموقع القديم',w.origin)].filter(Boolean).forEach(x=>links.append(x));detail.append(links);dialog.showModal();document.body.classList.add('dialog-open')}
 document.querySelectorAll('[data-archive-filter]').forEach(btn=>btn.addEventListener('click',()=>{category=btn.dataset.archiveFilter;document.querySelectorAll('[data-archive-filter]').forEach(b=>{const state=b===btn;b.classList.toggle('selected',state);b.setAttribute('aria-pressed',String(state))});paint()}));
 search.addEventListener('input',()=>{query=search.value;paint()});
+document.querySelectorAll('[data-archive-open]').forEach(b=>b.addEventListener('click',()=>{const w=works.find(x=>x.id===b.dataset.archiveOpen);if(w)show(w,b)}));
 document.getElementById('archive-close').addEventListener('click',()=>dialog.close());
 dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
 dialog.addEventListener('close',()=>{document.body.classList.remove('dialog-open');activeTrigger?.focus()});
